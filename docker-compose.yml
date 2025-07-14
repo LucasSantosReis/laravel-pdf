@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/html:delegated
+      - ./scripts:/var/www/html/scripts:ro
+    environment:
+      - APP_ENV=local
+      - APP_DEBUG=true
+      - APP_URL=http://localhost:8080
+      - SNAPPY_PDF_ENABLED=true
+      - SNAPPY_PDF_BINARY=/usr/bin/wkhtmltopdf
+      - SNAPPY_IMAGE_ENABLED=true
+      - SNAPPY_IMAGE_BINARY=/usr/bin/wkhtmltoimage
